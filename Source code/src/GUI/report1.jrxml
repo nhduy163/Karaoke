@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="46f428f9-8bac-49c6-81ce-9fee1a1bf7a7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select sum(TongTien) as TT, day(NgayHD), month(NgayHD)
+from hoadon 
+where month(NgayHD) = 12 and year(NgayHD) = 2017
+group by date(NgayHD)]]>
+	</queryString>
+	<field name="TT" class="java.lang.Double"/>
+	<field name="day(NgayHD)" class="java.lang.Integer"/>
+	<field name="month(NgayHD)" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="162" y="10" width="209" height="22" uuid="4fba21c5-9f0c-4656-ae23-e113998bffec"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thống kê doanh thu tháng]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="371" y="10" width="38" height="22" uuid="42f605b6-062c-44ed-ba69-e7e4c92a9858"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{month(NgayHD)}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="39"/>
+	</pageFooter>
+	<summary>
+		<band height="369">
+			<stackedBarChart>
+				<chart>
+					<reportElement x="0" y="20" width="555" height="311" uuid="3b0f1562-f1bd-4648-88a5-bee5825d7954"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{day(NgayHD)}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{day(NgayHD)}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{TT}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+			<staticText>
+				<reportElement x="34" y="287" width="30" height="14" uuid="9e1c9149-834f-4795-b0f8-2a8958ba61b4"/>
+				<text><![CDATA[Ngày]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="0" width="53" height="20" uuid="820b1eae-0101-4460-9e53-02bbcbd08016"/>
+				<text><![CDATA[Doanh thu]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
